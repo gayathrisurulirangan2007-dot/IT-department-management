@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IT Department | Smart Management System</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap');
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+font-family:'Inter',Arial,sans-serif;
+background:#f5f7ff;
+color:#18233a;
+}
+
+header{
+position:relative;
+overflow:hidden;
+padding:55px 20px 60px;
+text-align:center;
+color:white;
+background:linear-gradient(135deg,#071952,#0b4fce,#7b2ff7);
+}
+
+header:before,header:after{
+content:"";
+position:absolute;
+border-radius:50%;
+background:rgba(255,255,255,.10);
+}
+
+header:before{
+width:260px;height:260px;
+left:-80px;top:-100px;
+}
+
+header:after{
+width:350px;height:350px;
+right:-120px;bottom:-190px;
+}
+
+.header-content{position:relative;z-index:2}
+
+.logo{
+width:85px;height:85px;margin:auto;
+border-radius:24px;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:42px;
+background:rgba(255,255,255,.16);
+border:1px solid rgba(255,255,255,.35);
+box-shadow:0 15px 35px rgba(0,0,0,.22);
+}
+
+header h1{
+margin-top:18px;
+font-family:'Poppins',sans-serif;
+font-size:40px;
+font-weight:800;
+}
+
+header p{margin-top:8px;font-size:17px;opacity:.9}
+
+nav{
+position:sticky;
+top:0;
+z-index:100;
+padding:14px;
+text-align:center;
+background:rgba(255,255,255,.94);
+backdrop-filter:blur(15px);
+box-shadow:0 5px 25px rgba(28,40,80,.12);
+}
+
+nav button{
+border:0;
+padding:11px 17px;
+margin:4px;
+border-radius:30px;
+color:#27406f;
+background:#eef3ff;
+font-weight:700;
+cursor:pointer;
+transition:.3s;
+}
+
+nav button:hover{
+color:white;
+background:linear-gradient(135deg,#1769e0,#7b2ff7);
+transform:translateY(-2px);
+}
+
+.container{
+width:92%;
+max-width:1150px;
+margin:35px auto;
+}
+
+.section{display:none;animation:fade .4s ease}
+.section.active{display:block}
+
+@keyframes fade{
+from{opacity:0;transform:translateY(12px)}
+to{opacity:1;transform:translateY(0)}
+}
+
+h2{
+font-family:'Poppins',sans-serif;
+color:#172d67;
+font-size:27px;
+margin-bottom:22px;
+}
+
+.card-container{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+gap:22px;
+}
+
+.card{
+position:relative;
+overflow:hidden;
+padding:28px;
+border-radius:22px;
+background:white;
+border:1px solid #e6eaff;
+box-shadow:0 12px 30px rgba(32,48,100,.09);
+transition:.3s;
+}
+
+.card:hover{
+transform:translateY(-7px);
+box-shadow:0 18px 35px rgba(32,48,100,.16);
+}
+
+.card h3{
+position:relative;
+z-index:2;
+color:#52658f;
+font-size:15px;
+}
+
+.card p{
+position:relative;
+z-index:2;
+margin-top:12px;
+color:#172d67;
+font-size:38px;
+font-weight:800;
+}
+
+.form-box{
+padding:28px;
+border-radius:22px;
+background:white;
+border:1px solid #e7eaff;
+box-shadow:0 12px 30px rgba(32,48,100,.09);
+margin-bottom:25px;
+}
+
+label{
+display:block;
+margin-top:8px;
+color:#33476f;
+font-size:14px;
+font-weight:700;
+}
+
+input,select,textarea{
+width:100%;
+margin:7px 0 15px;
+padding:13px 15px;
+border:1px solid #d8def0;
+border-radius:12px;
+outline:none;
+background:#fbfcff;
+font-size:15px;
+}
+
+textarea{min-height:105px;resize:vertical}
+
+.primary{
+border:0;
+padding:13px 24px;
+border-radius:12px;
+color:white;
+background:linear-gradient(135deg,#1769e0,#7b2ff7);
+font-weight:800;
+cursor:pointer;
+box-shadow:0 8px 20px rgba(80,76,220,.25);
+}
+
+.record{
+padding:22px;
+margin:16px 0;
+border-radius:18px;
+background:white;
+border:1px solid #e7eaff;
+border-left:5px solid #536dfe;
+box-shadow:0 8px 25px rgba(32,48,100,.08);
+}
+
+.record h3{color:#213a80;margin-bottom:10px}
+
+.danger{
+border:0;
+padding:8px 15px;
+border-radius:9px;
+color:white;
+background:#e53935;
+font-weight:700;
+cursor:pointer;
+}
+
+.profile-card{
+padding:28px;
+margin-bottom:22px;
+border-radius:22px;
+background:white;
+border:1px solid #e4e8ff;
+box-shadow:0 12px 30px rgba(32,48,100,.10);
+text-align:center;
+}
+
+.photo-box{
+width:165px;height:165px;
+margin:5px auto 18px;
+display:flex;
+align-items:center;
+justify-content:center;
+overflow:hidden;
+border-radius:22px;
+border:4px solid #6877ff;
+background:linear-gradient(135deg,#eef1ff,#f8edff);
+color:#6671b8;
+font-size:58px;
+}
+
+.photo-box img{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+.profile-info{
+padding:18px;
+border-radius:15px;
+background:#f6f8ff;
+text-align:left;
+line-height:2;
+}
+
+.year-buttons{
+margin-bottom:20px;
+text-align:center;
+}
+
+.year-buttons button{
+border:0;
+margin:4px;
+padding:10px 17px;
+border-radius:25px;
+color:#304783;
+background:#e9edff;
+font-weight:700;
+cursor:pointer;
+}
+
+.empty{
+padding:35px;
+text-align:center;
+color:#7884a2;
+background:white;
+border-radius:18px;
+}
+
+footer{
+margin-top:60px;
+padding:38px 20px;
+text-align:center;
+color:white;
+background:linear-gradient(135deg,#071952,#0b4fce,#7b2ff7);
+}
+
+footer h3{
+font-family:'Poppins',sans-serif;
+margin-bottom:8px;
+}
+
+footer p{margin:5px;opacity:.85}
+
+@media(max-width:600px){
+header h1{font-size:29px}
+header p{font-size:14px}
+nav button{font-size:12px;padding:9px 12px}
+.container{width:94%}
+h2{font-size:23px}
+.form-box{padding:20px}
+.photo-box{width:145px;height:145px}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="header-content">
+<div class="logo">💻</div>
+<h1>Information Technology</h1>
+<p>Department Management & Academic Information System</p>
+</div>
+</header>
+
+<nav>
+<button onclick="showSection('dashboard')">🏠 Dashboard</button>
+<button onclick="showSection('daily')">📅 Daily Updates</button>
+<button onclick="showSection('students')">🎓 Students</button>
+<button onclick="showSection('studentRecords')">👤 Profiles</button>
+<button onclick="showSection('faculty')">👨‍🏫 Faculty / Staff</button>
+<button onclick="showSection('announcements')">📢 Announcements</button>
+<button onclick="showSection('history')">🕒 History</button>
+</nav>
+
+<div class="container">
+
+<section id="dashboard" class="section active">
+<h2>✨ Department Dashboard</h2>
+
+<div class="card-container">
+
+<div class="card">
+<h3>🎓 1st Year</h3>
+<p id="year1Count">0</p>
+</div>
+
+<div class="card">
+<h3>🎓 2nd Year</h3>
+<p id="year2Count">0</p>
+</div>
+
+<div class="card">
+<h3>🎓 3rd Year</h3>
+<p id="year3Count">0</p>
+</div>
+
+<div class="card">
+<h3>🎓 4th Year</h3>
+<p id="year4Count">0</p>
+</div>
+
+<div class="card">
+<h3>🎓 Total Students</h3>
+<p id="studentCount">0</p>
+</div>
+
+<div class="card">
+<h3>👨‍🏫 Faculty / Staff</h3>
+<p id="facultyCount">0</p>
+</div>
+
+<div class="card">
+<h3>📅 Daily Updates</h3>
+<p id="dailyCount">0</p>
+</div>
+
+<div class="card">
+<h3>📢 Announcements</h3>
+<p id="announcementCount">0</p>
+</div>
+
+</div>
+</section>
+
+<section id="daily" class="section">
+<h2>📅 Daily Department Update</h2>
+
+<div class="form-box">
+<form id="dailyForm">
+
+<label>Date</label>
+<input type="date" id="dailyDate" required>
+
+<label>Year</label>
+<select id="dailyYear" required>
+<option value="">Select Year</option>
+<option>1st Year</option>
+<option>2nd Year</option>
+<option>3rd Year</option>
+<option>4th Year</option>
+</select>
+
+<label>Activity Type</label>
+<select id="activityType" required>
+<option value="">Select Activity</option>
+<option>Class</option>
+<option>Lab</option>
+<option>Seminar</option>
+<option>Workshop</option>
+<option>Event</option>
+<option>Meeting</option>
+<option>Other</option>
+</select>
+
+<label>Faculty / Staff</label>
+<input type="text" id="dailyFaculty">
+
+<label>Description</label>
+<textarea id="dailyDescription"></textarea>
+
+<button class="primary" type="submit">💾 Save Daily Update</button>
+
+</form>
+</div>
+
+<div id="dailyList"></div>
+</section>
+
+<section id="students" class="section">
+<h2>🎓 Student Profile Management</h2>
+
+<div class="form-box">
+<form id="studentForm">
+
+<label>Student Name</label>
+<input type="text" id="studentName" required>
+
+<label>Register Number</label>
+<input type="text" id="registerNumber" required>
+
+<label>Academic Year</label>
+<select id="studentYear" required>
+<option value="">Select Year</option>
+<option>1st Year</option>
+<option>2nd Year</option>
+<option>3rd Year</option>
+<option>4th Year</option>
+</select>
+
+<label>Section</label>
+<input type="text" id="studentSection">
+
+<label>Email</label>
+<input type="email" id="studentEmail">
+
+<label>Phone</label>
+<input type="text" id="studentPhone">
+
+<label>Profile Photo</label>
+<input type="file" id="studentPhoto" accept="image/*">
+
+<label>Remarks</label>
+<textarea id="studentRemarks"></textarea>
+
+<button class="primary" type="submit">✨ Save Student Profile</button>
+
+</form>
+</div>
+</section>
+
+<section id="studentRecords" class="section">
+<h2>👤 Student Profiles</h2>
+
+<div class="year-buttons">
+<button onclick="filterStudents('All')">All</button>
+<button onclick="filterStudents('1st Year')">1st Year</button>
+<button onclick="filterStudents('2nd Year')">2nd Year</button>
+<button onclick="filterStudents('3rd Year')">3rd Year</button>
+<button onclick="filterStudents('4th Year')">4th Year</button>
+</div>
+
+<div id="profileList"></div>
+</section>
+
+<section id="faculty" class="section">
+<h2>👨‍🏫 Faculty / Staff Management</h2>
+
+<div class="form-box">
+<form id="facultyForm">
+
+<label>Name</label>
+<input type="text" id="facultyName" required>
+
+<label>Designation</label>
+<input type="text" id="designation" required>
+
+<label>Department</label>
+<input type="text" id="facultyDepartment" value="Information Technology">
+
+<label>Email</label>
+<input type="email" id="facultyEmail">
+
+<label>Phone</label>
+<input type="text" id="facultyPhone">
+
+<button class="primary" type="submit">💾 Save Faculty / Staff</button>
+
+</form>
+</div>
+
+<div id="facultyList"></div>
+</section>
+
+<section id="announcements" class="section">
+<h2>📢 Department Announcements</h2>
+
+<div class="form-box">
+<form id="announcementForm">
+
+<label>Date</label>
+<input type="date" id="announcementDate" required>
+
+<label>Title</label>
+<input type="text" id="announcementTitle" required>
+
+<label>Announcement</label>
+<textarea id="announcementText" required></textarea>
+
+<button class="primary" type="submit">📢 Publish Announcement</button>
+
+</form>
+</div>
+
+<div id="announcementList"></div>
+</section>
+
+<section id="history" class="section">
+<h2>🕒 Department Update History</h2>
+<div id="historyList"></div>
+</section>
+
+</div>
+
+<footer>
+<h3>💻 Information Technology Department</h3>
+<p>Smart Department Management System</p>
+<p>1st Year • 2nd Year • 3rd Year • 4th Year</p>
+<p>Academic Data • Daily Activities • Faculty • Students</p>
+</footer>
+
+<script>
+
+let students=JSON.parse(localStorage.getItem("students"))||[];
+let faculty=JSON.parse(localStorage.getItem("faculty"))||[];
+let dailyUpdates=JSON.parse(localStorage.getItem("dailyUpdates"))||[];
+let announcements=JSON.parse(localStorage.getItem("announcements"))||[];
+let history=JSON.parse(localStorage.getItem("history"))||[];
+
+function showSection(id){
+document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"));
+document.getElementById(id).classList.add("active");
+displayAll();
+}
+
+document.getElementById("studentForm").addEventListener("submit",function(e){
+e.preventDefault();
+
+let file=document.getElementById("studentPhoto").files[0];
+
+function saveStudent(photo){
+
+let student={
+id:Date.now(),
+name:document.getElementById("studentName").value,
+reg:document.getElementById("registerNumber").value,
+year:document.getElementById("studentYear").value,
+section:document.getElementById("studentSection").value,
+email:document.getElementById("studentEmail").value,
+phone:document.getElementById("studentPhone").value,
+photo:photo,
+remarks:document.getElementById("studentRemarks").value
+};
+
+students.push(student);
+saveAll();
+addHistory("Student added: "+student.name);
+
+document.getElementById("studentForm").reset();
+displayAll();
+
+alert("Student profile saved successfully!");
+}
+
+if(file){
+let reader=new FileReader();
+reader.onload=function(){saveStudent(reader.result)};
+reader.readAsDataURL(file);
+}else{
+saveStudent("");
+}
+});
+
+function filterStudents(year){
+
+let list=document.getElementById("profileList");
+
+let data=year==="All"
+?students
+:students.filter(s=>s.year===year);
+
+if(data.length===0){
+list.innerHTML='<div class="empty">No student profiles found.</div>';
+return;
+}
+
+list.innerHTML=data.map(s=>`
+
+<div class="profile-card">
+
+<div class="photo-box">
+${s.photo?`<img src="${s.photo}" alt="Student Photo">`:`👤`}
+</div>
+
+<h2>${escapeHTML(s.name)}</h2>
+
+<div class="profile-info">
+
+<b>Register Number:</b> ${escapeHTML(s.reg)}<br>
+<b>Academic Year:</b> ${escapeHTML(s.year)}<br>
+<b>Section:</b> ${escapeHTML(s.section||"-")}<br>
+<b>Email:</b> ${escapeHTML(s.email||"-")}<br>
+<b>Phone:</b> ${escapeHTML(s.phone||"-")}<br>
+<b>Remarks:</b> ${escapeHTML(s.remarks||"-")}
+
+</div>
+
+<br>
+
+<button class="danger" onclick="deleteStudent(${s.id})">
+🗑 Delete Profile
+</button>
+
+</div>
+
+`).join("");
+}
+
+function deleteStudent(id){
+if(!confirm("Delete this student profile?"))return;
+students=students.filter(s=>s.id!==id);
+saveAll();
+displayAll();
+}
+
+document.getElementById("facultyForm").addEventListener("submit",function(e){
+e.preventDefault();
+
+let f={
+id:Date.now(),
+name:document.getElementById("facultyName").value,
+designation:document.getElementById("designation").value,
+department:document.getElementById("facultyDepartment").value,
+email:document.getElementById("facultyEmail").value,
+phone:document.getElementById("facultyPhone").value
+};
+
+faculty.push(f);
+saveAll();
+addHistory("Faculty/Staff added: "+f.name);
+
+this.reset();
+document.getElementById("facultyDepartment").value="Information Technology";
+
+displayAll();
+alert("Faculty / Staff saved successfully!");
+});
+
+function displayFaculty(){
+
+let list=document.getElementById("facultyList");
+
+if(faculty.length===0){
+list.innerHTML='<div class="empty">No Faculty / Staff records yet.</div>';
+return;
+}
+
+list.innerHTML=faculty.map(f=>`
+
+<div class="record">
+
+<h3>👨‍🏫 ${escapeHTML(f.name)}</h3>
+
+<b>Designation:</b> ${escapeHTML(f.designation)}<br>
+<b>Department:</b> ${escapeHTML(f.department)}<br>
+<b>Email:</b> ${escapeHTML(f.email||"-")}<br>
+<b>Phone:</b> ${escapeHTML(f.phone||"-")}<br><br>
+
+<button class="danger" onclick="deleteFaculty(${f.id})">
+🗑 Delete
+</button>
+
+</div>
+
+`).join("");
+}
+
+function deleteFaculty(id){
+if(!confirm("Delete this Faculty / Staff record?"))return;
+faculty=faculty.filter(f=>f.id!==id);
+saveAll();
+displayAll();
+}
+
+document.getElementById("dailyForm").addEventListener("submit",function(e){
+e.preventDefault();
+
+let update={
+id:Date.now(),
+date:document.getElementById("dailyDate").value,
+year:document.getElementById("dailyYear").value,
+activity:document.getElementById("activityType").value,
+faculty:document.getElementById("dailyFaculty").value,
+description:document.getElementById("dailyDescription").value
+};
+
+dailyUpdates.push(update);
+saveAll();
+addHistory("Daily update added: "+update.activity);
+
+this.reset();
+displayAll();
+
+alert("Daily Update saved successfully!");
+});
+
+function displayDaily(){
+
+let list=document.getElementById("dailyList");
+
+if(dailyUpdates.length===0){
+list.innerHTML='<div class="empty">No daily updates yet.</div>';
+return;
+}
+
+list.innerHTML=dailyUpdates.slice().reverse().map(d=>`
+
+<div class="record">
+
+<h3>📅 ${escapeHTML(d.date)}</h3>
+
+<b>Year:</b> ${escapeHTML(d.year)}<br>
+<b>Activity:</b> ${escapeHTML(d.activity)}<br>
+<b>Faculty / Staff:</b> ${escapeHTML(d.faculty||"-")}<br>
+<b>Description:</b> ${escapeHTML(d.description||"-")}<br><br>
+
+<button class="danger" onclick="deleteDaily(${d.id})">
+🗑 Delete
+</button>
+
+</div>
+
+`).join("");
+}
+
+function deleteDaily(id){
+if(!confirm("Delete this daily update?"))return;
+dailyUpdates=dailyUpdates.filter(d=>d.id!==id);
+saveAll();
+displayAll();
+}
+
+document.getElementById("announcementForm").addEventListener("submit",function(e){
+e.preventDefault();
+
+let a={
+id:Date.now(),
+date:document.getElementById("announcementDate").value,
+title:document.getElementById("announcementTitle").value,
+text:document.getElementById("announcementText").value
+};
+
+announcements.push(a);
+saveAll();
+addHistory("Announcement added: "+a.title);
+
+this.reset();
+displayAll();
+
+alert("Announcement published successfully!");
+});
+
+function displayAnnouncements(){
+
+let list=document.getElementById("announcementList");
+
+if(announcements.length===0){
+list.innerHTML='<div class="empty">No announcements yet.</div>';
+return;
+}
+
+list.innerHTML=announcements.slice().reverse().map(a=>`
+
+<div class="record">
+
+<h3>📢 ${escapeHTML(a.title)}</h3>
+
+<b>Date:</b> ${escapeHTML(a.date)}<br><br>
+
+${escapeHTML(a.text)}
+
+<br><br>
+
+<button class="danger" onclick="deleteAnnouncement(${a.id})">
+🗑 Delete
+</button>
+
+</div>
+
+`).join("");
+}
+
+function deleteAnnouncement(id){
+if(!confirm("Delete this announcement?"))return;
+announcements=announcements.filter(a=>a.id!==id);
+saveAll();
+displayAll();
+}
+
+function addHistory(message){
+
+history.push({
+id:Date.now(),
+time:new Date().toLocaleString(),
+message:message
+});
+
+saveAll();
+}
+
+function displayHistory(){
+
+let list=document.getElementById("historyList");
+
+if(history.length===0){
+list.innerHTML='<div class="empty">No update history yet.</div>';
+return;
+}
+
+list.innerHTML=history.slice().reverse().map(h=>`
+
+<div class="record">
+
+<b>${escapeHTML(h.message)}</b><br>
+<small>${escapeHTML(h.time)}</small>
+
+<br><br>
+
+<button class="danger" onclick="deleteHistory(${h.id})">
+🗑 Delete History
+</button>
+
+</div>
+
+`).join("");
+}
+
+function deleteHistory(id){
+if(!confirm("Delete this history record?"))return;
+history=history.filter(h=>h.id!==id);
+saveAll();
+displayHistory();
+}
+
+function saveAll(){
+
+localStorage.setItem("students",JSON.stringify(students));
+localStorage.setItem("faculty",JSON.stringify(faculty));
+localStorage.setItem("dailyUpdates",JSON.stringify(dailyUpdates));
+localStorage.setItem("announcements",JSON.stringify(announcements));
+localStorage.setItem("history",JSON.stringify(history));
+
+}
+
+function updateDashboard(){
+
+document.getElementById("studentCount").innerText=students.length;
+
+document.getElementById("facultyCount").innerText=faculty.length;
+
+document.getElementById("dailyCount").innerText=dailyUpdates.length;
+
+document.getElementById("announcementCount").innerText=announcements.length;
+
+document.getElementById("year1Count").innerText=
+students.filter(s=>s.year==="1st Year").length;
+
+document.getElementById("year2Count").innerText=
+students.filter(s=>s.year==="2nd Year").length;
+
+document.getElementById("year3Count").innerText=
+students.filter(s=>s.year==="3rd Year").length;
+
+document.getElementById("year4Count").innerText=
+students.filter(s=>s.year==="4th Year").length;
+
+}
+
+function displayAll(){
+
+filterStudents("All");
+displayFaculty();
+displayDaily();
+displayAnnouncements();
+displayHistory();
+updateDashboard();
+
+}
+
+function escapeHTML(value){
+
+return String(value)
+.replaceAll("&","&amp;")
+.replaceAll("<","&lt;")
+.replaceAll(">","&gt;")
+.replaceAll('"',"&quot;")
+.replaceAll("'","&#039;");
+
+}
+
+document.getElementById("dailyDate").value=
+new Date().toISOString().split("T")[0];
+
+document.getElementById("announcementDate").value=
+new Date().toISOString().split("T")[0];
+
+displayAll();
+
+</script>
+
+</body>
+</html>
